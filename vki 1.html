@@ -1,0 +1,164 @@
+<br />
+<h4>
+<span style="color: #38761d;">Vücut Kitle Endeksinizi Hesaplayın</span></h4>
+<br />
+<style type="text/css">
+body,td,th {
+ font-family: Baskerville, "Palatino Linotype", Palatino, "Century Schoolbook L", "Times New Roman", serif;
+}
+</style><span style="color: #6aa84f;">
+Kilonuzu kilogram , boyunuzu santimetre cinsinden aşağıdaki biçimde girin ve "Bakalım Nasılız" butonuna basın 
+
+</span><br />
+<form method="POST" name="BMI">
+<table border="1" style="height: 67px; width: 300px;">
+<tbody>
+<tr>
+<td width="79"><div align="CENTER">
+<span style="color: #a64d79;">Ağırlığınız (kg)</span></div>
+</td>
+<td width="77"><div align="CENTER">
+<span style="color: #a64d79;">Boyunuz (cm)</span></div>
+</td>
+<td width="71"><div align="CENTER">
+<span style="color: #a64d79;">Sizin İndeksiniz</span></div>
+</td>
+<td width="320"><div align="CENTER">
+<span style="color: #a64d79;">Yorum</span></div>
+</td>
+</tr>
+<tr>
+<td><input name="weight" onfocus="this.form.weight.value=''" size="10" type="TEXT" /></td>
+<td><input name="height" onfocus="this.form.height.value=''" size="10" type="TEXT" /></td>
+<td><input name="bmi" size="8" type="TEXT" /></td>
+<td><input name="my_comment" size="40" type="TEXT" /></td>
+</tr>
+</tbody></table>
+<span style="color: #134f5c;"><input onclick="computeform(this.form)" type="button" value="Bakalım Nasılız" />
+<input onclick="ClearForm(this.form)" type="reset" value="Yenile" />
+</span></form>
+<hr />
+<span style="color: #6aa84f;">Dünya Sağlık Örgütü Kiloya Göre Sınırlama
+</span><br />
+<span style="color: #6aa84f;">DSÖ VKİ için sınır değerler</span><br />
+<table border="2" cellpadding="0" cellspacing="0">
+<tbody>
+<tr>
+<td><b><span style="color: #741b47;">Kategory</span></b></td>
+<td><b><span style="color: #741b47;">VKİ sınır – kg/m<sup>2</sup></span></b></td>
+</tr>
+<tr>
+<td><span style="color: #741b47;">Çok ciddi zayıf</span></td>
+<td><span style="color: #741b47;">15 altı</span></td>
+</tr>
+<tr>
+<td><span style="color: #741b47;">Ciddi zayıf</span></td>
+<td><span style="color: #741b47;">15.0 ila 16.0 arası</span></td>
+</tr>
+<tr>
+<td><span style="color: #741b47;">Zayıf</span></td>
+<td><span style="color: #741b47;">16.0 ila 18.5 arası</span></td>
+</tr>
+<tr>
+<td><span style="color: #741b47;">Normal (Sağlıklı kiloda)</span></td>
+<td><span style="color: #741b47;">18.5 ils 25 arası</span></td>
+</tr>
+<tr>
+<td><span style="color: #741b47;">Fazla kilolu</span></td>
+<td><span style="color: #741b47;">25 ila 30 arası</span></td>
+</tr>
+<tr>
+<td><span style="color: #741b47;">1. Sınıf obez(Hafif obez)</span></td>
+<td><span style="color: #741b47;">30 ila 35 arası</span></td>
+</tr>
+<tr>
+<td><span style="color: #741b47;">2. Sınıf obez  (Ciddi obez)</span></td>
+<td><span style="color: #741b47;">35 ila 40 arası</span></td>
+</tr>
+<tr>
+<td><span style="color: #741b47;">3. Sınıf obez (Çok ağır obez)</span></td>
+<td><span style="color: #741b47;">40 üstü</span></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<script language="JAVASCRIPT">
+
+function ClearForm(form){
+
+    form.weight.value = "";
+    form.height.value = "";
+    form.bmi.value = "";
+    form.my_comment.value = "";
+
+}
+
+function bmi(weight, height) {
+
+          bmindx=weight/eval(height*height);
+          return bmindx;
+}
+
+function checkform(form) {
+
+       if (form.weight.value==null||form.weight.value.length==0 || form.height.value==null||form.height.value.length==0){
+            alert("\nPlease complete the form first");
+            return false;
+       }
+
+       else if (parseFloat(form.height.value) <= 0||
+                parseFloat(form.height.value) >=500||
+                parseFloat(form.weight.value) <= 0||
+                parseFloat(form.weight.value) >=500){
+                alert("\nReally know what you're doing? \nPlease enter values again. \nWeight in kilos and \nheight in cm");
+                ClearForm(form);
+                return false;
+       }
+       return true;
+
+}
+
+function computeform(form) {
+
+       if (checkform(form)) {
+
+       yourbmi=Math.round(bmi(form.weight.value, form.height.value/100));
+       form.bmi.value=yourbmi;
+
+       if (yourbmi >40) {
+          form.my_comment.value="Aşırı obezsin, bir hekime başvurmalısın!";
+       }
+
+       else if (yourbmi >30 && yourbmi <=40) {
+          form.my_comment.value="Malesef... obezsin bir hekime  danışsan nasıl olur?";
+       }
+
+       else if (yourbmi >27 && yourbmi <=30) {
+          form.my_comment.value="Aşırı kilolusun, birşeyler yapmazsan geç olabilir";
+       }
+
+       else if (yourbmi >22 && yourbmi <=27) {
+          form.my_comment.value=" Biraz kilolusun, sanırım diyet ve egzersiz yapmalısın";
+       }
+
+       else if (yourbmi >=21 && yourbmi <=22) {
+          form.my_comment.value="Sana imreniyorum. Aynen devam et!!";
+       }
+
+       else if (yourbmi >=18 && yourbmi <21) {
+          form.my_comment.value="Zayıfsın , yiyebiliyorken tadını çıkar.";
+       }
+
+       else if (yourbmi >=16 && yourbmi <18) {
+          form.my_comment.value="Sanırım aç dolaşıyorsun. Yemene dikkat et!";
+       }
+
+       else if (yourbmi <16) {
+          form.my_comment.value="Sanırım hiç birşey yemiyorsun, Hastaneye gitmek zorunda kalabilirsin ";
+       }
+
+       }
+       return;
+}
+ // -- done hiding from old browsers -->
+</script>
